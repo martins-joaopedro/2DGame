@@ -16,13 +16,13 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        System.out.println("Mouse arrastado de " + e.getX()); 
+        //System.out.println("Mouse arrastado de " + e.getX()); 
         gamePanel.dragRectangle(e.getX(), e.getY());
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mouse movido");
+        //System.out.println("Mouse movido");
     }
 
     @Override
