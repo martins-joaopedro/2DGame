@@ -1,7 +1,5 @@
 package main;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 
 public class Window {
@@ -9,9 +7,13 @@ public class Window {
 
     public Window(GamePanel gamePanel) {
         jframe = new JFrame();
-        jframe.setSize(800, 800);
-        jframe.add(gamePanel);
-        jframe.setVisible(true);
+        //jframe.setSize(800, 800);
+        
         jframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jframe.add(gamePanel);
+        jframe.setResizable(false);
+        jframe.pack();
+        jframe.setVisible(true);
+        
     }
 }

@@ -3,14 +3,17 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import main.Game;
 import main.GamePanel;
 
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
+    private Game game;
 
-    public KeyboardInputs(GamePanel g) {
+    public KeyboardInputs(GamePanel g, Game game) {
         this.gamePanel = g;
+        this.game = game;
     }
 
     @Override
@@ -21,26 +24,26 @@ public class KeyboardInputs implements KeyListener {
 
             case KeyEvent.VK_W:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                gamePanel.changeDirection(0);
-                gamePanel.changeYPosition(-10);
+                game.getPlayer().changeDirection(0);
+                game.getPlayer().changeYPosition(-10);
                 break;
 
                 case KeyEvent.VK_D:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                gamePanel.changeDirection(1);
-                gamePanel.changeXPosition(+10);
+                game.getPlayer().changeDirection(1);
+                game.getPlayer().changeXPosition(+10);
                 break;
 
             case KeyEvent.VK_S:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                gamePanel.changeDirection(2);
-                gamePanel.changeYPosition(+10);
+                game.getPlayer().changeDirection(2);
+                game.getPlayer().changeYPosition(+10);
                 break;
 
             case KeyEvent.VK_A:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                gamePanel.changeDirection(3);
-                gamePanel.changeXPosition(-10);
+                game.getPlayer().changeDirection(3);
+                game.getPlayer().changeXPosition(-10);
                 break;
         }
     }
