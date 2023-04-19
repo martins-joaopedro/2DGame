@@ -3,7 +3,9 @@ package entities;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import main.Game;
 import utils.LoadSave;
+import static utils.HelpMethods.canMove;
 import static utils.Constants.PlayerConstants.*;
 
 public class Player extends Entity {
@@ -16,10 +18,17 @@ public class Player extends Entity {
 
     private int playerAction = LEFT_WALKING;
     private LoadSave l = new LoadSave();
+    private int[][] levelData;
 
-    public Player(int x, int y) {
-        super(x, y);
+    private boolean debuging = true;
+
+    private float xDrawOffset = 0*Game.SCALE;
+    private float yDrawOffset = 0sad*Game.SCALE;
+
+    public Player(float x, float y, float width, float height) {
+        super(x, y, width, height);
         load();
+        initHitbox(x, y, 48*Game.SCALE, 48*Game.SCALE);
     }
 
     public void load() {
@@ -41,6 +50,10 @@ public class Player extends Entity {
     }
 
     public void update() {
+        updateAnimationTick();
+    }
+
+    public void updateAnimationTick() {
         animationTick++;
 
         if (animationTick >= animationSpeed) {
@@ -53,16 +66,34 @@ public class Player extends Entity {
         }
     }
 
+    public void loadLevelData(int[][] levelData) {
+        this.levelData = levelData;
+        printLevelData();
+    }
+
     public void render(Graphics g) {
-        g.drawImage(animations[playerAction][animationIndex], x, y, 48 * 3, 64 * 3, null);
+        g.drawImage(animations[playerAction][animationIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), (int)width, (int)height, null);
+        drawHitbox(g);
+    }
+
+    public void printLevelData() {
+        System.out.println("DEBUGANDO");
+        for(int i=0; i<levelData.length; i++) {
+            for(int j=0; j<levelData[i].length; j++) {
+                System.out.print(levelData[i][j] + " ");
+            }
+            System.out.println();
+        }        
     }
 
     public void changeXPosition(int x) {
-        this.x += x;
+        if(canMove(hitbox.x + x, hitbox.y, width, height, levelData))
+            hitbox.x += x;
     }
 
     public void changeYPosition(int y) {
-        this.y += y;
+        if(canMove(hitbox.x, hitbox.y + y, width, height, levelData))
+            hitbox.y += y;
     }
 
     public void changeDirection(int v) {

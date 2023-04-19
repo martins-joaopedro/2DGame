@@ -33,11 +33,17 @@ public class Game implements Runnable {
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         startGameLoop();
+        initDebug(true);
+    }
+
+    public void initDebug(boolean state) {
+        p.setDebugingState(state);
     }
 
     private void initializeClasses() {
-        p = new Player(200, 200);
-        lm = new LevelManager(this); 
+        lm = new LevelManager(this);
+        p = new Player(100, 100, 48*SCALE, 64*SCALE);
+        p.loadLevelData(lm.getCurrentLevel().getLevelData());
     }
 
     private void startGameLoop() {
@@ -94,7 +100,7 @@ public class Game implements Runnable {
             //MAIN MACHINE -> Checks every second and makes everything to update
             if(System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                System.out.println("FPS " + frames + "| UPS: " + updates);
+                //System.out.println("FPS " + frames + "| UPS: " + updates);
                 updates = 0;
                 frames = 0;
             }

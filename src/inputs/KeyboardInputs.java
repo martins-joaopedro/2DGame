@@ -25,25 +25,25 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_W:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
                 game.getPlayer().changeDirection(0);
-                game.getPlayer().changeYPosition(-10);
+                game.getPlayer().changeYPosition(-3);
                 break;
 
                 case KeyEvent.VK_D:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
                 game.getPlayer().changeDirection(1);
-                game.getPlayer().changeXPosition(+10);
+                game.getPlayer().changeXPosition(+3);
                 break;
 
             case KeyEvent.VK_S:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
                 game.getPlayer().changeDirection(2);
-                game.getPlayer().changeYPosition(+10);
+                game.getPlayer().changeYPosition(+3);
                 break;
 
             case KeyEvent.VK_A:
                 System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
                 game.getPlayer().changeDirection(3);
-                game.getPlayer().changeXPosition(-10);
+                game.getPlayer().changeXPosition(-3);
                 break;
         }
     }
