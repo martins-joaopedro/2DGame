@@ -9,7 +9,7 @@ public class HelpMethods {
             if(!isSolid(x+width, y+height, lvlData))
                 if(!isSolid(x+width, y, lvlData))
                     if(!isSolid(x, y+height, lvlData))
-                        return true;
+                        return true; 
         return false;
     }
 

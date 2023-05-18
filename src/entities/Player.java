@@ -22,13 +22,17 @@ public class Player extends Entity {
 
     private boolean debuging = true;
 
-    private float xDrawOffset = 0*Game.SCALE;
-    private float yDrawOffset = 0sad*Game.SCALE;
+    private float xDrawOffset = 5*Game.SCALE;
+    private float yDrawOffset = 15*Game.SCALE;
+
+    private float playerSpeed = 4;
+
+    private boolean left, right, up, down;
 
     public Player(float x, float y, float width, float height) {
         super(x, y, width, height);
         load();
-        initHitbox(x, y, 48*Game.SCALE, 48*Game.SCALE);
+        initHitbox(x, y, 40*Game.SCALE, 48*Game.SCALE);
     }
 
     public void load() {
@@ -50,7 +54,30 @@ public class Player extends Entity {
     }
 
     public void update() {
+        updatePosition();
         updateAnimationTick();
+    }
+
+    private void updatePosition() {
+
+        if(!left && !right && !up && !down)
+            return;
+
+        float xSpeed = 0, ySpeed = 0;
+
+        if(left && !right)
+            xSpeed = -playerSpeed;
+        else if(right && !left)
+            xSpeed = playerSpeed;
+        if(up && !down)
+            ySpeed = -playerSpeed;
+        else if(down && !up)
+            ySpeed = playerSpeed;
+
+        if(canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, levelData)) {
+            hitbox.x += xSpeed;
+            hitbox.y += ySpeed;
+        }
     }
 
     public void updateAnimationTick() {
@@ -86,17 +113,40 @@ public class Player extends Entity {
         }        
     }
 
-    public void changeXPosition(int x) {
-        if(canMove(hitbox.x + x, hitbox.y, width, height, levelData))
-            hitbox.x += x;
-    }
-
-    public void changeYPosition(int y) {
-        if(canMove(hitbox.x, hitbox.y + y, width, height, levelData))
-            hitbox.y += y;
-    }
-
-    public void changeDirection(int v) {
+    public void setDirection(int v) {
         this.playerAction = v;
     }
+
+    public boolean isLeft() {
+        return left;
+    }
+
+    public void setLeft(boolean left) {
+        this.left = left;
+    }
+
+    public boolean isRight() {
+        return right;
+    }
+
+    public void setRight(boolean right) {
+        this.right = right;
+    }
+
+    public boolean isUp() {
+        return up;
+    }
+
+    public void setUp(boolean up) {
+        this.up = up;
+    }
+
+    public boolean isDown() {
+        return down;
+    }
+
+    public void setDown(boolean down) {
+        this.down = down;
+    }
+
 }

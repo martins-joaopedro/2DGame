@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
-
 import main.GamePanel;
 
 public abstract class Entity {
@@ -26,11 +25,6 @@ public abstract class Entity {
         hitbox = new Rectangle2D.Float(x, y, width, height);
     }
 
-   /*  protected void updateHitbox() {
-        hitbox.x = x;
-        hitbox.y = y;
-    } */
-
     public void setDebugingState(boolean state) {
         this.isDebuging = state;
     }
@@ -38,10 +32,9 @@ public abstract class Entity {
     protected void drawHitbox(Graphics g) {
         //Debug hitbox
         if(isDebuging) {
-            g.setColor(Color.RED);
+            g.setColor(Color.PINK);
             g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
         }
-        
     }
 
     public Rectangle2D.Float getHitbox() {

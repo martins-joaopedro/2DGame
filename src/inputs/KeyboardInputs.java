@@ -8,6 +8,11 @@ import main.GamePanel;
 
 public class KeyboardInputs implements KeyListener {
 
+    public static final int UP = 0;
+    public static final int DOWN = 2;
+    public static final int LEFT = 3;
+    public static final int RIGHT = 1;
+
     private GamePanel gamePanel;
     private Game game;
 
@@ -18,43 +23,52 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-        // System.out.println("APERTOU");
         switch (e.getKeyCode()) {
-
             case KeyEvent.VK_W:
-                System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                game.getPlayer().changeDirection(0);
-                game.getPlayer().changeYPosition(-3);
+                game.getPlayer().setDirection(UP);
+                game.getPlayer().setUp(true);
                 break;
 
-                case KeyEvent.VK_D:
-                System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                game.getPlayer().changeDirection(1);
-                game.getPlayer().changeXPosition(+3);
+                case KeyEvent.VK_D:         
+                game.getPlayer().setDirection(RIGHT);
+                game.getPlayer().setRight(true);
                 break;
 
-            case KeyEvent.VK_S:
-                System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                game.getPlayer().changeDirection(2);
-                game.getPlayer().changeYPosition(+3);
+            case KeyEvent.VK_S:        
+                game.getPlayer().setDirection(DOWN);
+                game.getPlayer().setDown(true);
                 break;
 
             case KeyEvent.VK_A:
-                System.out.println("A tecla " + e.getKeyChar() + " foi pressionada");
-                game.getPlayer().changeDirection(3);
-                game.getPlayer().changeXPosition(-3);
+                game.getPlayer().setDirection(LEFT);
+                game.getPlayer().setLeft(true);
+                break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                game.getPlayer().setUp(false);
+                break;
+
+                case KeyEvent.VK_D:         
+                game.getPlayer().setRight(false);
+                break;
+
+            case KeyEvent.VK_S:       
+                game.getPlayer().setDown(false);
+                break;
+
+            case KeyEvent.VK_A:
+                game.getPlayer().setLeft(false);
                 break;
         }
     }
 
     @Override
     public void keyTyped(KeyEvent e) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         // TODO Auto-generated method stub
     }
 
