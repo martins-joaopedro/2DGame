@@ -6,9 +6,36 @@ This project is focused on learning game development concepts and improving java
 
 It consists of a platform game that involves shooting enemies and going through increasingly levels
 
-## Folder Structure
+### Diagram
 
-The workspace contains two folders by default, where:
+```
+classDiagram
+Entity <|-- Player
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+class Entity {
+    private int x;
+    private int y;
+    private int width;
+    private int height;
+    private Rectangle hitbox
+    private int xSpeed;
+    private int ySpeed;
+    private boolean moving;
+    private String action;
+    private BufferedImage[][] animations;
+    private int animationTick;
+    private int ticksPerFrame;
+
+    render()
+    update()
+    drawHitbox()
+    verifyValidPosition()
+
+}
+
+class Player {
+    atack()
+}
+
+class Creature
+```
