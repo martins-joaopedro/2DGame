@@ -23,6 +23,7 @@ public class Game implements Runnable {
 
     private LevelManager lm;
     private Player p;
+    private Player p1;
 
     public Game() {
         initializeClasses();
@@ -42,8 +43,9 @@ public class Game implements Runnable {
 
     private void initializeClasses() {
         lm = new LevelManager(this);
-        p = new Player(200, 200, (int) 48 * SCALE, (int) 64 * SCALE);
-        p.loadLevelData(lm.getCurrentLevel().getLevelData());
+        p = new Player(200, 200, (int) 48 * SCALE, (int) 64 * SCALE, lm);
+
+        //p1 = new Player(0, 100, (int) 48 * SCALE, (int) 64 * SCALE, lm);
     }
 
     private void startGameLoop() {
@@ -53,11 +55,13 @@ public class Game implements Runnable {
 
     private void update() {
         p.update();
+        p1.update();
     }
 
     public void render(Graphics g) {
         lm.draw(g);
         p.render(g);
+        p1.render(g);
     }
 
     public Player getPlayer() {

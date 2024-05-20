@@ -15,7 +15,7 @@ public class HelpMethods {
 
     public static boolean isSolid(float x, float y, int[][] lvlData) {
 
-        System.out.println("x: " + x + "y: " + y);
+        //System.out.println("x: " + x + "y: " + y);
 
         if( x < 0 || x >= Game.GAME_WIDTH)
             return true;
