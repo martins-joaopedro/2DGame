@@ -11,7 +11,7 @@ public class Game implements Runnable {
     public final static float SCALE = 1.0f;
     public final static int TILES_IN_WIDTH = 26;
     public final static int TILES_IN_HEIGHT = 14;
-    public final static int TILES_SIZE = (int)(TILES_DEFAULT_SIZE * SCALE);
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE);
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH;
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT;
 
@@ -42,7 +42,7 @@ public class Game implements Runnable {
 
     private void initializeClasses() {
         lm = new LevelManager(this);
-        p = new Player(200, 200, (int) 48*SCALE, (int) 64*SCALE);
+        p = new Player(200, 200, (int) 48 * SCALE, (int) 64 * SCALE);
         p.loadLevelData(lm.getCurrentLevel().getLevelData());
     }
 
@@ -52,7 +52,7 @@ public class Game implements Runnable {
     }
 
     private void update() {
-       p.update();
+        p.update();
     }
 
     public void render(Graphics g) {
@@ -67,40 +67,40 @@ public class Game implements Runnable {
     @Override
     public void run() {
 
-        double timePerFrame =  1000000000.0 / FPS_SET;
-        double timePerUpdate =  1000000000.0 / UPS_SET;
-    
+        double timePerFrame = 1000000000.0 / FPS_SET;
+        double timePerUpdate = 1000000000.0 / UPS_SET;
+
         long lastCheck = System.currentTimeMillis();
-        long previousTime = System.nanoTime(); 
+        long previousTime = System.nanoTime();
 
         int frames = 0;
         int updates = 0;
         double deltaU = 0, deltaF = 0;
 
-        while(true) {
+        while (true) {
 
             long currentTime = System.nanoTime();
-        
-            deltaF += (currentTime - previousTime)/timePerFrame;
-            deltaU += (currentTime - previousTime)/timePerUpdate;
+
+            deltaF += (currentTime - previousTime) / timePerFrame;
+            deltaU += (currentTime - previousTime) / timePerUpdate;
             previousTime = currentTime;
 
-            if(deltaU >= 1) {
+            if (deltaU >= 1) {
                 update();
                 updates++;
                 deltaU--;
             }
 
-            if(deltaF >= 1) {  
+            if (deltaF >= 1) {
                 gamePanel.repaint();
                 frames++;
                 deltaF--;
             }
 
-            //MAIN MACHINE -> Checks every second and makes everything to update
-            if(System.currentTimeMillis() - lastCheck >= 1000) {
+            // MAIN MACHINE -> Checks every second and makes everything to update
+            if (System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
-                //System.out.println("FPS " + frames + "| UPS: " + updates);
+                // System.out.println("FPS " + frames + "| UPS: " + updates);
                 updates = 0;
                 frames = 0;
             }
