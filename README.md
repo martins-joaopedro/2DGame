@@ -8,7 +8,7 @@ It consists of a platform game that involves shooting enemies and going through 
 
 ### Diagram
 
-```
+```mermaid
 classDiagram
 Entity <|-- Player
 
