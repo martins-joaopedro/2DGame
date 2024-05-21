@@ -22,7 +22,6 @@ public abstract class Entity {
     private float playerSpeed, ySpeed;
     // TODO
     private int action;
-    private String[] actions;
     protected Map<String, Boolean> movements;
     private boolean moving;
     private String movingDirection;
@@ -80,10 +79,10 @@ public abstract class Entity {
             xSpeed = playerSpeed;
 
         if (movements.get("UP") && !movements.get("DOWN"))
-            ySpeed = -xSpeed;
+            ySpeed = -playerSpeed;
 
         else if (movements.get("DOWN") && !movements.get("UP"))
-            ySpeed = xSpeed; 
+            ySpeed = playerSpeed; 
 
         if (canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height)) {
             x += xSpeed;
@@ -134,8 +133,7 @@ public abstract class Entity {
         }
     }
 
-    public void setDirection(int v) {
-        this.action = v;
+    public void setAction(int value) {
+        this.action = value;
     }
-
 }
