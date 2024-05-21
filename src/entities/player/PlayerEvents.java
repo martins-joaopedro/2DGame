@@ -1,4 +1,4 @@
-package observer;
+package entities.player;
 
 public enum PlayerEvents {
     PRESS_UP("UP", true),
@@ -10,16 +10,16 @@ public enum PlayerEvents {
     RELEASE_LEFT("LEFT", false), 
     RELEASE_RIGHT("RIGHT", false); 
 
-    private String event;
+    private String key;
     private boolean value;
 
-    PlayerEvents(String event, boolean value) {
-        this.event = event;
+    PlayerEvents(String key, boolean value) {
+        this.key = key;
         this.value = value;
     }
 
-    public String getEvent() {
-        return event;
+    public String getKey() {
+        return key;
     }
 
     public boolean getValue() {

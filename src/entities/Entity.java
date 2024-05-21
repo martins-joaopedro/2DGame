@@ -8,14 +8,10 @@ import static utils.HelpMethods.*;
 
 import levels.LevelManager;
 import main.Game;
-import observer.PlayerEvents;
 
 import java.awt.image.BufferedImage;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-
-import org.w3c.dom.events.Event;
 
 import utils.LoadSave;
 
@@ -28,7 +24,7 @@ public abstract class Entity {
     // TODO
     private int action;
     private String[] actions;
-    private boolean up, down, left, right;
+    protected Map<String, Boolean> movements;
     private boolean moving;
     private String movingDirection;
     private LevelManager lm;
@@ -59,6 +55,14 @@ public abstract class Entity {
         this.height = height;
         this.atlas = atlas;
         this.lm = lm;
+        this.movements = new HashMap<>();
+        startMovements();
+    }
+
+    public void startMovements() {
+        String[] allowedMoves = {"UP", "DOWN", "LEFT", "RIGHT"};
+        for(String s : allowedMoves)
+            this.movements.put(s, false);
     }
 
     protected void drawHitbox(Graphics g) {
@@ -70,32 +74,21 @@ public abstract class Entity {
         return hitbox;
     }
 
-    public void notifyKeys(String key, boolean value) {
-
-        /* String[] movingKeys = {"UP", "DOWN", "LEFT", "RIGHT"};
-        for(String s : movingKeys)
-            if(s == key)
-                updatePosition(s, value); */
-                
-    }
-
     protected void updatePosition() {
-
-        System.out.println("right" + right);
-        System.out.println("left" + left);
-        System.out.println("down" + down);
-        System.out.println("up" + up);
 
         float speed = 0, ySpeed = 0;
 
-        if (left && !right)
+        if(movements.get("LEFT") && !movements.get("RIGHT"))
             speed = -xSpeed;
-        else if (right && !left)
+
+        else if(movements.get("RIGHT") && !movements.get("LEFT"))
             speed = xSpeed;
-        if (up && !down)
+
+        if (movements.get("UP") && !movements.get("DOWN"))
             ySpeed = -xSpeed;
-        else if (down && !up)
-            ySpeed = xSpeed;
+
+        else if (movements.get("DOWN") && !movements.get("UP"))
+            ySpeed = xSpeed; 
 
         if (canMove((hitbox.x + speed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, lm)) {
             x += speed;
@@ -114,7 +107,7 @@ public abstract class Entity {
     }
 
     public void update() {
-        //updatePosition();
+        updatePosition();
         updateAnimationTick();
     }
 
@@ -150,19 +143,4 @@ public abstract class Entity {
         this.action = v;
     }
 
-    public void setLeft(boolean value) {
-        this.left = value;
-    }
-
-    public void setRight(boolean value) {
-        this.right = value;
-    }
-
-    public void setUp(boolean value) {
-        this.up = value;
-    }
-
-    public void setDown(boolean value) {
-        this.down = value;
-    }
 }

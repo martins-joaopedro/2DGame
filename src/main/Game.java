@@ -2,11 +2,11 @@ package main;
 
 import java.awt.Graphics;
 
-import entities.Player;
+import entities.player.Player;
+import entities.player.PlayerEvents;
 import levels.LevelManager;
 import observer.Event;
 import observer.NotificationService;
-import observer.PlayerEvents;
 
 public class Game implements Runnable {
 
@@ -69,16 +69,6 @@ public class Game implements Runnable {
 
     public NotificationService getService() {
         return this.service;
-    }
-
-    public void notifyKeyPressedEvent(String key) {
-        System.out.println("notifying pressed" + key);
-        p.notifyKeys(key, true);
-    }
-
-    public void notifyKeyReleasedEvent(String key) {
-        System.out.println("notifying released" + key);
-        p.notifyKeys(key, false);
     }
 
     @Override
