@@ -34,16 +34,11 @@ public class Game implements Runnable {
         gamePanel.setFocusable(true);
         gamePanel.requestFocus();
         startGameLoop();
-        initDebug(true);
-    }
-
-    public void initDebug(boolean state) {
-        p.setDebugingState(state);
     }
 
     private void initializeClasses() {
         lm = new LevelManager(this);
-        p = new Player(200, 200, (int) 48 * SCALE, (int) 64 * SCALE, lm);
+        p = new Player(200, 200, (int) 42 * SCALE, (int) 48 * SCALE, lm);
 
         //p1 = new Player(0, 100, (int) 48 * SCALE, (int) 64 * SCALE, lm);
     }
@@ -55,13 +50,11 @@ public class Game implements Runnable {
 
     private void update() {
         p.update();
-        p1.update();
     }
 
     public void render(Graphics g) {
         lm.draw(g);
         p.render(g);
-        p1.render(g);
     }
 
     public Player getPlayer() {
