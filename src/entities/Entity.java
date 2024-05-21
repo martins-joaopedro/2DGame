@@ -9,19 +9,24 @@ import static utils.HelpMethods.*;
 import levels.LevelManager;
 import main.Game;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 import utils.LoadSave;
 
 public abstract class Entity {
 
+    protected float x, y;
     protected Rectangle2D.Float hitbox;
     private float width, height;
-    private float xSpeed = 1, ySpeed;
+    private float xSpeed, ySpeed;
     // TODO
     private int action;
     private String[] actions;
+    private boolean up, down, left, right;
     private boolean moving;
     private String movingDirection;
-    private boolean left, right, up, down;
     private LevelManager lm;
 
     private int animationTick = 0;
@@ -39,9 +44,13 @@ public abstract class Entity {
 
     public Entity(
             float x, float y,
+            float xSpeed,
             float width, float height,
             LevelManager lm, String atlas) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
+        this.x = x;
+        this.y = y;
+        this.xSpeed = xSpeed;
         this.width = width;
         this.height = height;
         this.atlas = atlas;
@@ -50,17 +59,27 @@ public abstract class Entity {
 
     protected void drawHitbox(Graphics g) {
         g.setColor(Color.RED);
-        g.drawRect((int) hitbox.x, (int) hitbox.y, (int) hitbox.width, (int) hitbox.height);
+        g.drawRect((int) x, (int) y, (int) hitbox.width, (int) hitbox.height);
     }
 
     public Rectangle2D.Float getHitbox() {
         return hitbox;
     }
 
-    protected void updatePosition() {
+    public void notifyKeys(String key, boolean value) {
 
-        if (!left && !right && !up && !down)
-            return;
+        String[] movingKeys = {"UP", "DOWN", "LEFT", "RIGHT"};
+        for(String s : movingKeys)
+            if(s == key)
+                updatePosition(s, value);
+                
+    }
+
+    protected void updatePosition(String key, boolean value) {
+        left = key == "LEFT" && value ;
+        up = key == "UP" && value;
+        down = key == "DOWN" && value;
+        right = key == "RIGHT" && value;
 
         float speed = 0, ySpeed = 0;
 
@@ -74,23 +93,23 @@ public abstract class Entity {
             ySpeed = xSpeed;
 
         if (canMove((hitbox.x + speed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, lm)) {
-            hitbox.x += speed;
-            hitbox.y += ySpeed;
+            x += speed;
+            y += ySpeed;
         }
     }
 
     public void render(Graphics g) {
         g.drawImage(
                 animations[action][animationIndex],
-                (int) (hitbox.x - xDrawOffset),
-                (int) (hitbox.y - yDrawOffset),
+                (int) (x - xDrawOffset),
+                (int) (y - yDrawOffset),
                 (int) width, (int) height,
                 null);
         drawHitbox(g);
     }
 
     public void update() {
-        updatePosition();
+        //updatePosition();
         updateAnimationTick();
     }
 

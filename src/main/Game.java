@@ -1,6 +1,12 @@
 package main;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
 
 import entities.Player;
 import levels.LevelManager;
@@ -38,7 +44,7 @@ public class Game implements Runnable {
 
     private void initializeClasses() {
         lm = new LevelManager(this);
-        p = new Player(200, 200, (int) 42 * SCALE, (int) 48 * SCALE, lm);
+        p = new Player(50, 200, (int) 42 * SCALE, (int) 48 * SCALE, lm);
 
         //p1 = new Player(0, 100, (int) 48 * SCALE, (int) 64 * SCALE, lm);
     }
@@ -59,6 +65,16 @@ public class Game implements Runnable {
 
     public Player getPlayer() {
         return this.p;
+    }
+
+    public void notifyKeyPressedEvent(String key) {
+        System.out.println("notifying pressed" + key);
+        p.notifyKeys(key, true);
+    }
+
+    public void notifyKeyReleasedEvent(String key) {
+        System.out.println("notifying released" + key);
+        p.notifyKeys(key, false);
     }
 
     @Override
