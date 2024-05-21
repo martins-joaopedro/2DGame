@@ -6,7 +6,6 @@ import java.awt.geom.Rectangle2D;
 
 import static utils.HelpMethods.*;
 
-import levels.LevelManager;
 import main.Game;
 
 import java.awt.image.BufferedImage;
@@ -27,7 +26,6 @@ public abstract class Entity {
     protected Map<String, Boolean> movements;
     private boolean moving;
     private String movingDirection;
-    private LevelManager lm;
 
     private int animationTick = 0;
     private int ticksPerFrame = 3;
@@ -40,13 +38,11 @@ public abstract class Entity {
     private float yDrawOffset = 15 * Game.SCALE;
     private String atlas;
 
-    // TODO level manager verify pos
-
     public Entity(
             float x, float y,
             float playerSpeed,
             float width, float height,
-            LevelManager lm, String atlas) {
+            String atlas) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
         this.x = x;
         this.y = y;
@@ -54,7 +50,6 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.atlas = atlas;
-        this.lm = lm;
         this.movements = new HashMap<>();
         startMovements();
     }
@@ -90,7 +85,7 @@ public abstract class Entity {
         else if (movements.get("DOWN") && !movements.get("UP"))
             ySpeed = xSpeed; 
 
-        if (canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, lm)) {
+        if (canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height)) {
             x += xSpeed;
             y += ySpeed;
         }

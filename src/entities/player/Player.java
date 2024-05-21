@@ -2,7 +2,6 @@ package entities.player;
 
 import observer.Event;
 import observer.EventListener;
-import levels.LevelManager;
 
 import static utils.Constants.PlayerConstants.*;
 
@@ -12,8 +11,8 @@ public class Player extends Entity implements EventListener {
 
     private int playerAction = LEFT_WALKING;
     
-    public Player(float x, float y, float width, float height, LevelManager lm) {
-        super(x, y, 1f, width, height, lm, "dodo.png");
+    public Player(float x, float y, float width, float height) {
+        super(x, y, 1f, width, height, "dodo.png");
         load();
         //initHitbox(x, y, 42*Game.SCALE, 48*Game.SCALE);
     }

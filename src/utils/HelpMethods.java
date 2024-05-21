@@ -5,8 +5,8 @@ import main.Game;
 
 public class HelpMethods {
 
-    public static final boolean canMove(float x, float y, float width, float height, LevelManager lm) {
-        int[][] lvlData = lm.getCurrentLevel().getLevelData();
+    public static final boolean canMove(float x, float y, float width, float height) {
+        int[][] lvlData = LevelManager.getCurrentLevel().getLevelData();
         if(!isSolid(x, y, lvlData))
             if(!isSolid(x+width, y+height, lvlData))
                 if(!isSolid(x+width, y, lvlData))

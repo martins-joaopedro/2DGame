@@ -43,7 +43,7 @@ public class Game implements Runnable {
 
     private void initializeClasses() {
         lm = new LevelManager(this);
-        p = new Player(50, 200, (int) 42 * SCALE, (int) 48 * SCALE, lm);
+        p = new Player(50, 200, (int) 42 * SCALE, (int) 48 * SCALE);
 
         for(Event event : Event.values())
             service.subscribe(event, p);

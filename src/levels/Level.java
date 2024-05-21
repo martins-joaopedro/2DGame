@@ -2,7 +2,7 @@ package levels;
 
 public class Level {
     
-    private int[][] lvlData;
+    private static int[][] lvlData;
 
     public Level(int[][] lvlData) {
         this.lvlData = lvlData; 
@@ -12,7 +12,7 @@ public class Level {
         return lvlData[y][x];
     }
 
-    public int[][] getLevelData() {
+    public static int[][] getLevelData() {
         return lvlData;
     }
 }
