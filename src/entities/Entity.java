@@ -8,10 +8,14 @@ import static utils.HelpMethods.*;
 
 import levels.LevelManager;
 import main.Game;
+import observer.PlayerEvents;
+
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import org.w3c.dom.events.Event;
 
 import utils.LoadSave;
 
@@ -68,18 +72,19 @@ public abstract class Entity {
 
     public void notifyKeys(String key, boolean value) {
 
-        String[] movingKeys = {"UP", "DOWN", "LEFT", "RIGHT"};
+        /* String[] movingKeys = {"UP", "DOWN", "LEFT", "RIGHT"};
         for(String s : movingKeys)
             if(s == key)
-                updatePosition(s, value);
+                updatePosition(s, value); */
                 
     }
 
-    protected void updatePosition(String key, boolean value) {
-        left = key == "LEFT" && value ;
-        up = key == "UP" && value;
-        down = key == "DOWN" && value;
-        right = key == "RIGHT" && value;
+    protected void updatePosition() {
+
+        System.out.println("right" + right);
+        System.out.println("left" + left);
+        System.out.println("down" + down);
+        System.out.println("up" + up);
 
         float speed = 0, ySpeed = 0;
 
@@ -145,35 +150,19 @@ public abstract class Entity {
         this.action = v;
     }
 
-    public boolean isLeft() {
-        return left;
+    public void setLeft(boolean value) {
+        this.left = value;
     }
 
-    public void setLeft(boolean left) {
-        this.left = left;
+    public void setRight(boolean value) {
+        this.right = value;
     }
 
-    public boolean isRight() {
-        return right;
+    public void setUp(boolean value) {
+        this.up = value;
     }
 
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isUp() {
-        return up;
-    }
-
-    public void setUp(boolean up) {
-        this.up = up;
-    }
-
-    public boolean isDown() {
-        return down;
-    }
-
-    public void setDown(boolean down) {
-        this.down = down;
+    public void setDown(boolean value) {
+        this.down = value;
     }
 }

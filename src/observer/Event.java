@@ -1,0 +1,6 @@
+package observer;
+
+public enum Event {
+    PRESS_UP, PRESS_DOWN, PRESS_LEFT, PRESS_RIGHT, 
+    RELEASE_UP, RELEASE_DOWN, RELEASE_LEFT, RELEASE_RIGHT, 
+}

@@ -1,15 +1,12 @@
 package main;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
 
 import entities.Player;
 import levels.LevelManager;
+import observer.Event;
+import observer.NotificationService;
+import observer.PlayerEvents;
 
 public class Game implements Runnable {
 
@@ -27,11 +24,13 @@ public class Game implements Runnable {
     private final int FPS_SET = 144;
     private final int UPS_SET = 200;
 
+    private NotificationService service;
     private LevelManager lm;
     private Player p;
-    private Player p1;
 
     public Game() {
+
+        service = new NotificationService();
         initializeClasses();
 
         gamePanel = new GamePanel(this);
@@ -46,7 +45,8 @@ public class Game implements Runnable {
         lm = new LevelManager(this);
         p = new Player(50, 200, (int) 42 * SCALE, (int) 48 * SCALE, lm);
 
-        //p1 = new Player(0, 100, (int) 48 * SCALE, (int) 64 * SCALE, lm);
+        for(Event event : Event.values())
+            service.subscribe(event, p);
     }
 
     private void startGameLoop() {
@@ -65,6 +65,10 @@ public class Game implements Runnable {
 
     public Player getPlayer() {
         return this.p;
+    }
+
+    public NotificationService getService() {
+        return this.service;
     }
 
     public void notifyKeyPressedEvent(String key) {

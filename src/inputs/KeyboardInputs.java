@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import main.Game;
 import main.GamePanel;
+import observer.Event;
 
 public class KeyboardInputs implements KeyListener {
 
@@ -25,19 +26,19 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                game.notifyKeyPressedEvent("UP");
+                game.getService().notify(Event.PRESS_UP);
                 break;
 
                 case KeyEvent.VK_D:         
-                game.notifyKeyPressedEvent("RIGHT");
+                game.getService().notify(Event.PRESS_RIGHT);
                 break;
 
             case KeyEvent.VK_S:        
-                game.notifyKeyPressedEvent("DOWN");
+            game.getService().notify(Event.PRESS_DOWN);
                 break;
 
             case KeyEvent.VK_A:
-                game.notifyKeyPressedEvent("LEFT");
+            game.getService().notify(Event.PRESS_LEFT);
                 break;
         }
     }
@@ -46,19 +47,19 @@ public class KeyboardInputs implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                game.notifyKeyReleasedEvent("UP");
+                game.getService().notify(Event.RELEASE_UP);
                 break;
 
             case KeyEvent.VK_D:         
-                game.notifyKeyReleasedEvent("RIGHT");
+                game.getService().notify(Event.RELEASE_RIGHT);
                 break;
 
             case KeyEvent.VK_S:        
-                game.notifyKeyReleasedEvent("DOWN");
+                game.getService().notify(Event.RELEASE_DOWN);
                 break;
 
             case KeyEvent.VK_A:
-                game.notifyKeyReleasedEvent("LEFT");
+                game.getService().notify(Event.RELEASE_LEFT);
                 break;
         }
     }
