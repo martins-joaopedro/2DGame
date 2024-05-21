@@ -7,9 +7,8 @@ import entities.Entity;
 public class Player extends Entity implements EventListener {
 
     public Player(float x, float y, float width, float height) {
-        super(x, y, 1f, width, height, "dodo.png");
+        super(x, y, 1f, width, height, PlayerConstants.ATLAS, PlayerConstants.xDrawOffset, PlayerConstants.yDrawOffset);
         load();
-        //initHitbox(x, y, 42*Game.SCALE, 48*Game.SCALE);
     }
 
     @Override
@@ -18,9 +17,7 @@ public class Player extends Entity implements EventListener {
         for(PlayerEvents event : PlayerEvents.values())
             if(event.name() == eventType.name()) {
                 movements.put(event.getKey(), event.getValue());
-                if(!event.getAction().isEmpty()) {
-                    setAction(event.getActionValue());
-                }
+                setAction(event.getAction());
             }
 
         //for other events...

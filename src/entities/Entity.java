@@ -33,15 +33,15 @@ public abstract class Entity {
     private BufferedImage img;
     public BufferedImage[][] animations;
 
-    private float xDrawOffset = 0;
-    private float yDrawOffset = 15 * Game.SCALE;
+    private float xDrawOffset;
+    private float yDrawOffset;
     private String atlas;
 
     public Entity(
             float x, float y,
             float playerSpeed,
             float width, float height,
-            String atlas) {
+            String atlas, float xDrawOffset, float yDrawOffset) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
         this.x = x;
         this.y = y;
@@ -49,6 +49,8 @@ public abstract class Entity {
         this.width = width;
         this.height = height;
         this.atlas = atlas;
+        this.xDrawOffset = xDrawOffset;
+        this.yDrawOffset = yDrawOffset;
         this.movements = new HashMap<>();
         startMovements();
     }
@@ -100,8 +102,14 @@ public abstract class Entity {
         drawHitbox(g);
     }
 
+    public void updateHitbox() {
+        this.hitbox.x = x;
+        this.hitbox.y = y;
+    }
+
     public void update() {
         updatePosition();
+        updateHitbox();
         updateAnimationTick();
     }
 
@@ -113,7 +121,7 @@ public abstract class Entity {
             animationTick = 0;
             animationIndex++;
 
-            if (animationIndex >= 3)
+            if (animationIndex == animations.length-1)
                 animationIndex = 0;
         }
     }

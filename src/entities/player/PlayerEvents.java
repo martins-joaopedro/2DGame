@@ -1,25 +1,23 @@
 package entities.player;
 
 public enum PlayerEvents {
-    PRESS_UP("UP", true, "TURN_BACKWARD", 0),
-    PRESS_DOWN("DOWN", true, "TURN_FORWARD", 2), 
-    PRESS_LEFT("LEFT", true, "TURN_LEFT", 3), 
-    PRESS_RIGHT("RIGHT", true, "TURN_RIGHT", 1),
-    RELEASE_UP("UP", false, "TURN_FORWARD", 1), 
-    RELEASE_DOWN("DOWN", false, "TURN_FORWARD", 2), 
-    RELEASE_LEFT("LEFT", false, "TURN_FORWARD", 2), 
-    RELEASE_RIGHT("RIGHT", false, "TURN_FORWARD", 2); 
+    PRESS_UP("UP", true, PlayerConstants.UP_WALKING),
+    PRESS_DOWN("DOWN", true, PlayerConstants.DOWN_WALKING), 
+    PRESS_LEFT("LEFT", true, PlayerConstants.LEFT_WALKING), 
+    PRESS_RIGHT("RIGHT", true, PlayerConstants.RIGHT_WALKING),
+    RELEASE_UP("UP", false, PlayerConstants.DOWN_WALKING), 
+    RELEASE_DOWN("DOWN", false, PlayerConstants.DOWN_WALKING), 
+    RELEASE_LEFT("LEFT", false, PlayerConstants.DOWN_WALKING), 
+    RELEASE_RIGHT("RIGHT", false, PlayerConstants.DOWN_WALKING); 
 
     private String key;
     private boolean value;
-    private String action;
-    private int actionValue;
+    private int action;
 
-    PlayerEvents(String key, boolean value, String action, int actionValue) {
+    PlayerEvents(String key, boolean value, int action) {
         this.key = key;
         this.value = value;
         this.action = action;
-        this.actionValue = actionValue;
     }
 
     public String getKey() {
@@ -30,11 +28,7 @@ public enum PlayerEvents {
         return this.value;
     }
 
-    public String getAction() {
+    public int getAction() {
         return action;
-    }
-    
-    public int getActionValue() {
-        return actionValue;
     }
 }
