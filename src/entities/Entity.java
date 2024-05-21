@@ -20,7 +20,7 @@ public abstract class Entity {
     protected float x, y;
     protected Rectangle2D.Float hitbox;
     private float width, height;
-    private float xSpeed, ySpeed;
+    private float playerSpeed, ySpeed;
     // TODO
     private int action;
     private String[] actions;
@@ -44,13 +44,13 @@ public abstract class Entity {
 
     public Entity(
             float x, float y,
-            float xSpeed,
+            float playerSpeed,
             float width, float height,
             LevelManager lm, String atlas) {
         hitbox = new Rectangle2D.Float(x, y, width, height);
         this.x = x;
         this.y = y;
-        this.xSpeed = xSpeed;
+        this.playerSpeed = playerSpeed;
         this.width = width;
         this.height = height;
         this.atlas = atlas;
@@ -76,13 +76,13 @@ public abstract class Entity {
 
     protected void updatePosition() {
 
-        float speed = 0, ySpeed = 0;
+        float xSpeed = 0, ySpeed = 0;
 
         if(movements.get("LEFT") && !movements.get("RIGHT"))
-            speed = -xSpeed;
+            xSpeed = -playerSpeed;
 
         else if(movements.get("RIGHT") && !movements.get("LEFT"))
-            speed = xSpeed;
+            xSpeed = playerSpeed;
 
         if (movements.get("UP") && !movements.get("DOWN"))
             ySpeed = -xSpeed;
@@ -90,8 +90,8 @@ public abstract class Entity {
         else if (movements.get("DOWN") && !movements.get("UP"))
             ySpeed = xSpeed; 
 
-        if (canMove((hitbox.x + speed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, lm)) {
-            x += speed;
+        if (canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height, lm)) {
+            x += xSpeed;
             y += ySpeed;
         }
     }
