@@ -5,10 +5,13 @@ public enum PlayerEvents {
     PRESS_DOWN("DOWN", true, PlayerConstants.DOWN_WALKING), 
     PRESS_LEFT("LEFT", true, PlayerConstants.LEFT_WALKING), 
     PRESS_RIGHT("RIGHT", true, PlayerConstants.RIGHT_WALKING),
+    PRESS_SPACE("SPACE", true, PlayerConstants.JUMP),
+
     RELEASE_UP("UP", false, PlayerConstants.DOWN_WALKING), 
     RELEASE_DOWN("DOWN", false, PlayerConstants.DOWN_WALKING), 
     RELEASE_LEFT("LEFT", false, PlayerConstants.DOWN_WALKING), 
-    RELEASE_RIGHT("RIGHT", false, PlayerConstants.DOWN_WALKING); 
+    RELEASE_RIGHT("RIGHT", false, PlayerConstants.DOWN_WALKING),
+    RELEASE_SPACE("SPACE", false, PlayerConstants.JUMP); 
 
     private String key;
     private boolean value;

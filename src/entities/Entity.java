@@ -20,6 +20,9 @@ public abstract class Entity {
     protected Rectangle2D.Float hitbox;
     private float width, height;
     private float playerSpeed, ySpeed;
+    private float gravitySpeed = 0;
+    private float gravity = 0.0f;
+
     // TODO
     private int action;
     protected Map<String, Boolean> movements;
@@ -56,7 +59,7 @@ public abstract class Entity {
     }
 
     public void startMovements() {
-        String[] allowedMoves = {"UP", "DOWN", "LEFT", "RIGHT"};
+        String[] allowedMoves = {"UP", "DOWN", "LEFT", "RIGHT", "SPACE"};
         for(String s : allowedMoves)
             this.movements.put(s, false);
     }
@@ -70,8 +73,24 @@ public abstract class Entity {
         return hitbox;
     }
 
-    protected void updatePosition() {
+    protected void gravity() {
+        System.out.println(gravitySpeed);
 
+        if (canMove((hitbox.x), (hitbox.y + 2*gravitySpeed), hitbox.width, hitbox.height)) {
+            gravitySpeed += gravity;
+            this.y += gravitySpeed;
+        } else this.gravitySpeed = 0;
+    }
+
+    protected void jump() {
+        if(gravitySpeed != 0) return;
+        System.out.println("jumping");
+            float yBoost = 50;
+            y -= yBoost;
+    }
+
+    protected void updatePosition() {
+        
         float xSpeed = 0, ySpeed = 0;
 
         if(movements.get("LEFT") && !movements.get("RIGHT"))
@@ -80,11 +99,11 @@ public abstract class Entity {
         else if(movements.get("RIGHT") && !movements.get("LEFT"))
             xSpeed = playerSpeed;
 
-        if (movements.get("UP") && !movements.get("DOWN"))
-            ySpeed = -playerSpeed;
+        if (movements.get("UP") && !movements.get("DOWN"));
+            //ySpeed = -playerSpeed;
 
-        else if (movements.get("DOWN") && !movements.get("UP"))
-            ySpeed = playerSpeed; 
+        if (movements.get("DOWN") && !movements.get("UP"));
+           //ySpeed = playerSpeed; 
 
         if (canMove((hitbox.x + xSpeed), (hitbox.y + ySpeed), hitbox.width, hitbox.height)) {
             x += xSpeed;
@@ -108,6 +127,7 @@ public abstract class Entity {
     }
 
     public void update() {
+        gravity();
         updatePosition();
         updateHitbox();
         updateAnimationTick();

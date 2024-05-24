@@ -28,7 +28,7 @@ public class HelpMethods {
         float yIndex = y / Game.TILES_SIZE;
 
         int value = lvlData[(int) yIndex][(int) xIndex];
-        System.out.println(value);
+        //System.out.println(value);
         ////////////////////////// !=
         if(value >= 48 || value < 0 || value != 11)
             return true;

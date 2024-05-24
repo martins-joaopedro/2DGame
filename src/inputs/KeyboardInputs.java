@@ -29,7 +29,7 @@ public class KeyboardInputs implements KeyListener {
                 game.getService().notify(Event.PRESS_UP);
                 break;
 
-                case KeyEvent.VK_D:         
+            case KeyEvent.VK_D:         
                 game.getService().notify(Event.PRESS_RIGHT);
                 break;
 
@@ -39,6 +39,10 @@ public class KeyboardInputs implements KeyListener {
 
             case KeyEvent.VK_A:
             game.getService().notify(Event.PRESS_LEFT);
+                break;
+
+            case KeyEvent.VK_SPACE:
+            game.getService().notify(Event.PRESS_SPACE);
                 break;
         }
     }
@@ -60,6 +64,10 @@ public class KeyboardInputs implements KeyListener {
 
             case KeyEvent.VK_A:
                 game.getService().notify(Event.RELEASE_LEFT);
+                break;
+
+            case KeyEvent.VK_SPACE:
+            game.getService().notify(Event.RELEASE_SPACE);
                 break;
         }
     }

@@ -16,8 +16,13 @@ public class Player extends Entity implements EventListener {
         //for movement event
         for(PlayerEvents event : PlayerEvents.values())
             if(event.name() == eventType.name()) {
-                movements.put(event.getKey(), event.getValue());
-                setAction(event.getAction());
+                if(event.getKey() == "SPACE")
+                    jump();
+
+                else { 
+                    movements.put(event.getKey(), event.getValue());
+                    setAction(event.getAction());
+                }
             }
 
         //for other events...

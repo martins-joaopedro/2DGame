@@ -9,6 +9,7 @@ public class PlayerConstants {
     public final static int RIGHT_WALKING = 1;
     public final static int DOWN_WALKING = 2;
     public final static int LEFT_WALKING = 3;
+    public final static int JUMP = 0;
 
     public static int GetSprintAmount(int player_action) {
         switch (player_action) {
